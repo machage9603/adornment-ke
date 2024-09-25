@@ -28,18 +28,20 @@ export default function Home() {
     <div className="relative">
       <Header cartItemCount={cartItems.length} />
 
-      {/* Hero Section */}
-      <Hero />
+      <main className="relative h-[300vh] pt-20 pb-16">
+        {/* Hero Section */}
+        <Hero />
 
-      {/* Category Section */}
-      <div className="mt-0">
-        <CategorySection />
-      </div>
+        {/* Category Section */}
+        <div className="mt-0">
+          <CategorySection />
+        </div>
 
-      {/* New Arrivals Section */}
-      <div className="mt-0">
-        <NewArrivalsCarousel addToCart={addToCart} />
-      </div>
+        {/* New Arrivals Section */}
+        <div className="mt-0">
+          <NewArrivalsCarousel addToCart={addToCart} />
+        </div>
+      </main>
 
       {/* Footer */}
       <Footer />

@@ -2,7 +2,7 @@
 
 export default function Hero() {
   return (
-    <section className="relative h-screen">
+    <section className="sticky top-0 h-screen">
       {/* Background image */}
       <div className="absolute inset-0">
         <img
