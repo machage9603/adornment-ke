@@ -7,8 +7,16 @@ import CategorySection from "./ui/CategorySection";
 import NewArrivalsCarousel from "./ui/NewArrivalsCarousel";
 import Footer from "./ui/Footer";
 import Cart from "./ui/Cart";
+import { useEffect, useRef } from "react";
+import { useScroll } from "framer-motion";
 
 export default function Home() {
+  const container = useRef();
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
@@ -28,13 +36,15 @@ export default function Home() {
     <div className="relative">
       <Header cartItemCount={cartItems.length} />
 
-      <main className="relative h-[300vh] pt-20 pb-16">
+      <main ref={container} className="relative h-[300vh] pt-20 pb-16">
         {/* Hero Section */}
-        <Hero />
+        <div className="sticky top-0 mt-0">
+          <Hero scrollYProgress={scrollYProgress} />
+        </div>
 
         {/* Category Section */}
-        <div className="mt-0">
-          <CategorySection />
+        <div className="sticky top-0 mt-0">
+          <CategorySection scrollYProgress={scrollYProgress} />
         </div>
 
         {/* New Arrivals Section */}

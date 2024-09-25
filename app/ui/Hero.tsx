@@ -1,8 +1,11 @@
 "use client";
 
-export default function Hero() {
+import { motion, useTransform } from "framer-motion";
+
+export default function Hero({ scrollYProgress }) {
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
   return (
-    <section className="sticky top-0 h-screen">
+    <motion.section style={{ scale }} className="relative h-screen">
       {/* Background image */}
       <div className="absolute inset-0">
         <img
@@ -23,6 +26,6 @@ export default function Hero() {
           Shop Now
         </button>
       </div>
-    </section>
+    </motion.section>
   );
 }

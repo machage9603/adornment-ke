@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { motion, useTransform } from "framer-motion";
 
-export default function CategorySection() {
+export default function CategorySection({ scrollYProgress }) {
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
   return (
-    <section className="py-8 bg-gray-100">
+    <motion.section style={{ scale }} className="py-8 bg-gray-100">
       {" "}
       {/* Reduced py-16 to py-8 */}
       <div className="container mx-auto px-4">
@@ -33,6 +35,6 @@ export default function CategorySection() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
