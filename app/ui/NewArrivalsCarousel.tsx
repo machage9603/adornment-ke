@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const products = [
-  { id: 1, name: "Aviator Classic", price: 161, image: "/aviator-classic.jpg" },
+  { id: 1, name: "Aviator Classic", price: 161, image: "/round.png" },
   {
     id: 2,
     name: "Wayfarer Classic",
@@ -18,24 +17,27 @@ const products = [
     price: 161,
     image: "/clubmaster-classic.jpg",
   },
-  { id: 4, name: "Round Metal", price: 161, image: "/round-metal.jpg" },
 ];
 
 export default function NewArrivalsCarousel({ addToCart }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex + 1) % Math.ceil(products.length / 3)
+    ); // Adjust based on how many cards are displayed
   };
 
   const prevSlide = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + products.length) % products.length
+      (prevIndex) =>
+        (prevIndex - 1 + Math.ceil(products.length / 3)) %
+        Math.ceil(products.length / 3)
     );
   };
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-12 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-8 text-center">New Arrivals</h2>
         <div className="relative">
@@ -52,14 +54,15 @@ export default function NewArrivalsCarousel({ addToCart }) {
             <ChevronRight className="w-6 h-6" />
           </button>
           <div className="overflow-hidden">
-            <motion.div
-              className="flex"
-              animate={{ x: `-${currentIndex * 100}%` }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            <div
+              className="flex transition-transform duration-300"
+              style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }} // Move according to 3 cards visible
             >
               {products.map((product) => (
-                <div key={product.id} className="w-full flex-shrink-0">
-                  <div className="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+                <div key={product.id} className="w-1/3 p-2">
+                  {" "}
+                  {/* Each card takes 1/3 width */}
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -80,7 +83,7 @@ export default function NewArrivalsCarousel({ addToCart }) {
                   </div>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
