@@ -1,17 +1,24 @@
 "use client";
 
-import { motion, useTransform } from "framer-motion";
+import { motion, useTransform, MotionValue } from "framer-motion";
+import Image from "next/image";
 
-export default function Hero({ scrollYProgress }) {
+interface HeroProps {
+  scrollYProgress: MotionValue<number>;
+}
+
+export default function Hero({ scrollYProgress }: HeroProps) {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
   return (
     <motion.section style={{ scale }} className="relative h-screen">
       {/* Background image */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src="/bg.png"
-          alt="Hero background"
-          className="w-full h-full object-cover"
+          alt="Hero bg"
+          layout="fill"
+          objectFit="cover"
+          priority={true}
         />
       </div>
 

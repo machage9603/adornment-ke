@@ -2,11 +2,24 @@
 
 import { useState } from "react";
 
-export default function Cart({ items, removeFromCart, checkout }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("card");
+// Define a type for the cart items
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+}
 
-  const total = items.reduce((sum, item) => sum + item.price, 0);
+interface CartProps {
+  items: CartItem[]; // Array of cart items
+  removeFromCart: (id: number) => void; // Function to remove item by ID
+  checkout: (paymentMethod: string) => void; // Function to handle checkout with payment method
+}
+
+export default function Cart({ items, removeFromCart, checkout }: CartProps) {
+  const [isOpen, setIsOpen] = useState<boolean>(false); // State for cart modal open/close
+  const [paymentMethod, setPaymentMethod] = useState<string>("card"); // State for payment method
+
+  const total = items.reduce((sum, item) => sum + item.price, 0); // Calculate total price
 
   return (
     <div className="fixed bottom-4 right-4 z-50">

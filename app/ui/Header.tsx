@@ -5,7 +5,11 @@ import { motion } from "framer-motion";
 import { Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
-export default function Header({ cartItemCount }) {
+interface HeaderProps {
+  cartItemCount: number;
+}
+
+export default function Header({ cartItemCount }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -15,17 +19,17 @@ export default function Header({ cartItemCount }) {
   }, []);
 
   const navItems = [
-    { name: "New Arrivals", href: "/" },
-    { name: "Sunglasses", href: "/sunglasses" },
-    { name: "Prescription", href: "/prescription" },
-    { name: "Caps", href: "/caps" },
-    { name: "Promo", href: "/promo" },
+    { name: "New & Featured", href: "/" },
+    { name: "Men", href: "/men" },
+    { name: "Women", href: "/women" },
+    { name: "Unisex", href: "/unisex" },
+    { name: "Brands", href: "/brands" },
   ];
 
   return (
     <motion.header
       className={`fixed w-full z-50 transition-colors duration-300 ${
-        isScrolled ? "bg-white text-black" : "bg-transparent text-white"
+        isScrolled ? "bg-transparent  text-black" : "bg-transparent text-black"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}

@@ -2,8 +2,23 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
-const products = [
+// Define a type for the product
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+}
+
+// Define the props for the component, including the type for addToCart
+interface NewArrivalsCarouselProps {
+  addToCart: (product: Product) => void;
+}
+
+// Example products
+const products: Product[] = [
   { id: 1, name: "Aviator Classic", price: 161, image: "/round.png" },
   {
     id: 2,
@@ -19,7 +34,9 @@ const products = [
   },
 ];
 
-export default function NewArrivalsCarousel({ addToCart }) {
+export default function NewArrivalsCarousel({
+  addToCart,
+}: NewArrivalsCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -60,10 +77,8 @@ export default function NewArrivalsCarousel({ addToCart }) {
             >
               {products.map((product) => (
                 <div key={product.id} className="w-1/3 p-2">
-                  {" "}
-                  {/* Each card takes 1/3 width */}
                   <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img
+                    <Image
                       src={product.image}
                       alt={product.name}
                       className="w-full h-64 object-cover"

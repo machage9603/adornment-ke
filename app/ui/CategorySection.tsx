@@ -1,8 +1,12 @@
-import { useState } from "react";
-import { motion, useTransform } from "framer-motion";
+import { motion, useTransform, MotionValue } from "framer-motion";
+import Image from "next/image";
 
-export default function CategorySection({ scrollYProgress }) {
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+interface CategoryProps {
+  scrollYProgress: MotionValue<number>;
+}
+
+export default function CategorySection({ scrollYProgress }: CategoryProps) {
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   return (
     <motion.section style={{ scale }} className="py-8 bg-gray-100">
       {" "}
@@ -14,7 +18,7 @@ export default function CategorySection({ scrollYProgress }) {
         {/* Reduced mb-8 to mb-4 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="relative h-96">
-            <img
+            <Image
               src="/men.png"
               alt="Men's Sunglasses"
               className="w-full h-full object-cover"
@@ -24,7 +28,7 @@ export default function CategorySection({ scrollYProgress }) {
             </div>
           </div>
           <div className="relative h-96">
-            <img
+            <Image
               src="/women.png"
               alt="Women's Sunglasses"
               className="w-full h-full object-cover"

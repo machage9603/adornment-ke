@@ -1,35 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Header from "./ui/Header";
 import Hero from "./ui/Hero";
 import CategorySection from "./ui/CategorySection";
 import NewArrivalsCarousel from "./ui/NewArrivalsCarousel";
 import Footer from "./ui/Footer";
 import Cart from "./ui/Cart";
-import { useEffect, useRef } from "react";
 import { useScroll } from "framer-motion";
 
+// Define a type for the product structure
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+}
+
 export default function Home() {
-  const container = useRef();
+  const container = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end end"],
   });
 
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState<Product[]>([]); // Specify the type for cartItems
 
-  const addToCart = (product) => {
-    setCartItems([...cartItems, product]);
+  const addToCart = (product: Product) => {
+    setCartItems((prevItems) => [...prevItems, product]); // Use functional update for state
   };
 
-  const removeFromCart = (productId) => {
-    setCartItems(cartItems.filter((item) => item.id !== productId));
+  const removeFromCart = (productId: number) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId)
+    ); // Use functional update
   };
 
-  const checkout = (paymentMethod) => {
+  const checkout = (paymentMethod: string) => {
     console.log(`Checkout completed with ${paymentMethod} payment!`);
-    setCartItems([]);
+    setCartItems([]); // Clear cart after checkout
   };
 
   return (
