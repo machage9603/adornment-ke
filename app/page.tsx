@@ -43,7 +43,7 @@ export default function Home() {
 
   return (
     <div className="relative">
-      <Header cartItemCount={cartItems.length} />
+      <Header cartItemCount={cartItems.length} favoriteItemCount={0} />
 
       <main ref={container} className="relative h-[300vh] pt-20 pb-16">
         {/* Hero Section */}

@@ -81,6 +81,8 @@ export default function NewArrivalsCarousel({
                     <Image
                       src={product.image}
                       alt={product.name}
+                      width={400} // Specify the width
+                      height={300} // Specify the height
                       className="w-full h-64 object-cover"
                     />
                     <div className="p-4">

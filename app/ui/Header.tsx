@@ -1,68 +1,138 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Search, ShoppingCart } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, Search, ShoppingBag, Heart } from "lucide-react";
 import Link from "next/link";
+import SideMenu from "./SideMenu";
 
 interface HeaderProps {
   cartItemCount: number;
+  favoriteItemCount: number;
 }
 
-export default function Header({ cartItemCount }: HeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Header({
+  cartItemCount,
+  favoriteItemCount,
+}: HeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
 
-  const navItems = [
-    { name: "New & Featured", href: "/" },
-    { name: "Men", href: "/men" },
-    { name: "Women", href: "/women" },
-    { name: "Unisex", href: "/unisex" },
-    { name: "Brands", href: "/brands" },
-  ];
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  const headerVariants = {
+    visible: { y: 0, opacity: 1 },
+    hidden: { y: -100, opacity: 0 },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   return (
-    <motion.header
-      className={`fixed w-full z-50 transition-colors duration-300 ${
-        isScrolled ? "bg-transparent  text-black" : "bg-transparent text-black"
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold">
-          AdornmentKE
-        </Link>
-        <nav>
-          <ul className="flex space-x-6">
-            {navItems.map((item) => (
-              <li key={item.name}>
-                <Link
-                  href={item.href}
-                  className="hover:text-gray-300 transition-colors"
-                >
-                  {item.name}
+    <>
+      <AnimatePresence>
+        {isVisible && (
+          <motion.header
+            className="fixed w-full z-50 bg-golden bg-opacity-80 backdrop-blur-md"
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={headerVariants}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="container mx-auto px-4 py-4 flex justify-between items-center padding-x">
+              <motion.button
+                onClick={() => setIsMenuOpen(true)}
+                className="text-black hover:text-gray-600 transition-colors"
+                aria-label="Open menu"
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: 0.1 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Menu className="w-6 h-6" />
+              </motion.button>
+              <motion.div
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: 0.2 }}
+              >
+                <Link href="/" className="text-2xl font-bold text-black">
+                  AdornmentKE
                 </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <div className="flex space-x-4">
-          <button aria-label="Search">
-            <Search className="w-6 h-6" />
-          </button>
-          <button aria-label="Cart">
-            <ShoppingCart className="w-6 h-6" />
-            <span className="ml-1">{cartItemCount}</span>
-          </button>
-        </div>
-      </div>
-    </motion.header>
+              </motion.div>
+              <div className="flex space-x-4">
+                <motion.button
+                  aria-label="Search"
+                  className="text-black hover:text-gray-600 transition-colors"
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ delay: 0.3 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Search className="w-6 h-6" />
+                </motion.button>
+                <motion.button
+                  aria-label="Favorites"
+                  className="text-black hover:text-gray-600 transition-colors relative"
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ delay: 0.4 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Heart className="w-6 h-6" />
+                  {favoriteItemCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                      {favoriteItemCount}
+                    </span>
+                  )}
+                </motion.button>
+                <motion.button
+                  aria-label="Cart"
+                  className="text-black hover:text-gray-600 transition-colors relative"
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ delay: 0.5 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ShoppingBag className="w-6 h-6" />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </motion.button>
+              </div>
+            </div>
+          </motion.header>
+        )}
+      </AnimatePresence>
+      <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+    </>
   );
 }

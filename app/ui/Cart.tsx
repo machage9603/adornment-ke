@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ShoppingBag } from "lucide-react";
 
 // Define a type for the cart items
 interface CartItem {
@@ -24,10 +25,15 @@ export default function Cart({ items, removeFromCart, checkout }: CartProps) {
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <button
-        className="bg-black text-white px-4 py-2 rounded-full"
+        className="bg-black text-white p-2 rounded-full relative"
         onClick={() => setIsOpen(true)}
       >
-        Cart ({items.length})
+        <ShoppingBag className="w-6 h-6" />
+        {items.length > 0 && (
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+            {items.length}
+          </span>
+        )}
       </button>
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
