@@ -1,8 +1,5 @@
-"use client";
-
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { X, Link } from "lucide-react";
 
 interface SideMenuProps {
   isOpen: boolean;
@@ -18,45 +15,72 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
     { name: "Brands", href: "/brands" },
   ];
 
+  const menuVariants = {
+    closed: {
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+    open: {
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
+  const linkVariants = {
+    closed: { y: 20, opacity: 0 },
+    open: (i: number) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: 0.1 + i * 0.1,
+      },
+    }),
+  };
+
   return (
-    <motion.div
-      className={`fixed inset-0 z-50 ${isOpen ? "" : "pointer-events-none"}`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: isOpen ? 1 : 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/placeholder.svg?height=1080&width=1920')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-2xl">
-          <div className="h-full flex flex-col justify-center items-center text-white">
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 z-40 bg-black bg-opacity-50 backdrop-blur-md"
+          initial="closed"
+          animate="open"
+          exit="closed"
+          variants={menuVariants}
+          onMouseLeave={onClose} // Close the menu when the mouse leaves
+        >
+          <div className="h-full flex flex-col items-center justify-center">
             <button
-              onClick={onClose}
+              onClick={onClose} // Close the menu on button click
               className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
             >
-              <X className="w-8 h-8" />
+              <X className="w-6 h-6" />
             </button>
             <nav>
               <ul className="space-y-6 text-center">
-                {navItems.map((item) => (
-                  <li key={item.name}>
+                {navItems.map((item, index) => (
+                  <motion.li
+                    key={item.name}
+                    variants={linkVariants}
+                    custom={index}
+                  >
                     <Link
                       href={item.href}
-                      className="text-3xl font-bold hover:text-gray-300 transition-colors block"
-                      onClick={onClose}
+                      className="text-4xl font-bold text-white hover:text-gray-300 transition-colors block"
+                      onClick={onClose} // Close the menu on link click
                     >
                       {item.name}
                     </Link>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </nav>
           </div>
-        </div>
-      </div>
-    </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

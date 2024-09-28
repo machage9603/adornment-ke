@@ -57,10 +57,11 @@ export default function Header({
             transition={{ duration: 0.3 }}
           >
             <div className="container mx-auto px-4 py-4 flex justify-between items-center padding-x">
+              {/* Menu Icon and Text */}
               <motion.button
-                onClick={() => setIsMenuOpen(true)}
-                className="text-black hover:text-gray-600 transition-colors"
-                aria-label="Open menu"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-black hover:text-gray-600 transition-colors flex items-center"
+                aria-label="Toggle menu"
                 variants={itemVariants}
                 initial="hidden"
                 animate="visible"
@@ -68,8 +69,11 @@ export default function Header({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Menu className="w-6 h-6" />
+                <Menu className="w-6 h-6 mr-2" />
+                <span className="text-lg font-bold">Menu</span>
               </motion.button>
+
+              {/* Logo */}
               <motion.div
                 variants={itemVariants}
                 initial="hidden"
@@ -80,6 +84,8 @@ export default function Header({
                   AdornmentKE
                 </Link>
               </motion.div>
+
+              {/* Icons (Search, Favorites, Cart) */}
               <div className="flex space-x-4">
                 <motion.button
                   aria-label="Search"
@@ -93,6 +99,7 @@ export default function Header({
                 >
                   <Search className="w-6 h-6" />
                 </motion.button>
+
                 <motion.button
                   aria-label="Favorites"
                   className="text-black hover:text-gray-600 transition-colors relative"
@@ -110,6 +117,7 @@ export default function Header({
                     </span>
                   )}
                 </motion.button>
+
                 <motion.button
                   aria-label="Cart"
                   className="text-black hover:text-gray-600 transition-colors relative"
@@ -132,6 +140,8 @@ export default function Header({
           </motion.header>
         )}
       </AnimatePresence>
+
+      {/* Side Menu Component */}
       <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </>
   );
