@@ -49,7 +49,7 @@ export default function Header({
       <AnimatePresence>
         {isVisible && (
           <motion.header
-            className="fixed w-full z-50 bg-golden bg-opacity-80 backdrop-blur-md"
+            className="fixed w-full z-50 bg-gray bg-opacity-40 backdrop-blur-md"
             initial="hidden"
             animate="visible"
             exit="hidden"
@@ -60,7 +60,7 @@ export default function Header({
               {/* Menu Icon and Text */}
               <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-black hover:text-gray-600 transition-colors flex items-center"
+                className="text-white hover:text-gray-200 transition-colors flex items-center"
                 aria-label="Toggle menu"
                 variants={itemVariants}
                 initial="hidden"
@@ -80,7 +80,7 @@ export default function Header({
                 animate="visible"
                 transition={{ delay: 0.2 }}
               >
-                <Link href="/" className="text-2xl font-bold text-black">
+                <Link href="/" className="text-2xl font-bold text-white">
                   AdornmentKE
                 </Link>
               </motion.div>
@@ -89,7 +89,7 @@ export default function Header({
               <div className="flex space-x-4">
                 <motion.button
                   aria-label="Search"
-                  className="text-black hover:text-gray-600 transition-colors"
+                  className="text-white hover:text-gray-200 transition-colors"
                   variants={itemVariants}
                   initial="hidden"
                   animate="visible"
@@ -102,7 +102,7 @@ export default function Header({
 
                 <motion.button
                   aria-label="Favorites"
-                  className="text-black hover:text-gray-600 transition-colors relative"
+                  className="text-white hover:text-gray-200 transition-colors relative"
                   variants={itemVariants}
                   initial="hidden"
                   animate="visible"
@@ -120,7 +120,7 @@ export default function Header({
 
                 <motion.button
                   aria-label="Cart"
-                  className="text-black hover:text-gray-600 transition-colors relative"
+                  className="text-white hover:text-gray-200 transition-colors relative"
                   variants={itemVariants}
                   initial="hidden"
                   animate="visible"
