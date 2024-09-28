@@ -27,9 +27,9 @@ export default function Hero({ scrollYProgress }: HeroProps) {
 
       {/* Centered content */}
       <div className="relative z-10 h-full flex flex-col justify-center items-center text-white text-center">
-        <h1 className="text-6xl font-bold mb-4">Discover Ray-Ban</h1>
+        <h1 className="text-6xl font-bold mb-4">Discover AdornmentKE</h1>
         <p className="text-2xl mb-8">Iconic styles for every personality</p>
-        <button className="bg-white text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-200 transition-colors">
+        <button className="bg-white text-black bg-opacity-30 hover:bg-gray-200 px-8 py-3 rounded-full text-lg font-semibold transition-colors">
           Shop Now
         </button>
       </div>
