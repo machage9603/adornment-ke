@@ -14,9 +14,9 @@ interface CategoryProps {
 }
 
 const categories = [
-  { name: "Men", image: "/men.png", hoverImage: "/men-hover.png" },
-  { name: "Women", image: "/women.png", hoverImage: "/women-hover.png" },
-  { name: "Unisex", image: "/unisex.png", hoverImage: "/unisex-hover.png" },
+  { name: "Men", image: "/men.jpg", hoverImage: "/menh.jpg" },
+  { name: "Women", image: "/women.jpg", hoverImage: "/womenh.jpg" },
+  { name: "Unisex", image: "/unisex.jpg", hoverImage: "/unisexh.jpg" },
 ];
 
 export default function CategorySection({ scrollYProgress }: CategoryProps) {
