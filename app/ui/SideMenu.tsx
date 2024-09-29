@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { X, Link } from "lucide-react";
+import { X } from "lucide-react";
+import Link from "next/link";
 
 interface SideMenuProps {
   isOpen: boolean;
@@ -50,11 +51,11 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
           animate="open"
           exit="closed"
           variants={menuVariants}
-          onMouseLeave={onClose} // Close the menu when the mouse leaves
+          onMouseLeave={onClose}
         >
           <div className="h-full flex flex-col items-center justify-center">
             <button
-              onClick={onClose} // Close the menu on button click
+              onClick={onClose}
               className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
             >
               <X className="w-6 h-6" />
@@ -70,7 +71,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
                     <Link
                       href={item.href}
                       className="text-4xl font-bold text-white hover:text-gray-300 transition-colors block"
-                      onClick={onClose} // Close the menu on link click
+                      onClick={onClose}
                     >
                       {item.name}
                     </Link>
