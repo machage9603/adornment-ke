@@ -94,7 +94,7 @@ export default function NewArrivalsCarousel({
                         onClick={() => addToCart(product)}
                         className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition-colors"
                       >
-                        Add to Cart
+                        Add to Bag
                       </button>
                     </div>
                   </div>
