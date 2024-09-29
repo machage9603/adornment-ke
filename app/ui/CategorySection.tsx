@@ -58,9 +58,9 @@ export default function CategorySection({ scrollYProgress }: CategoryProps) {
                   : categories[currentIndex].image
               }
               alt={`${categories[currentIndex].name}'s Sunglasses`}
-              layout="fill"
-              objectFit="cover"
+              fill
               priority
+              style={{ objectFit: "cover" }} // Use style prop for object-fit
             />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
               <h3 className="text-white text-5xl font-bold">

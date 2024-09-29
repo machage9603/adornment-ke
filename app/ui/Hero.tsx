@@ -16,9 +16,9 @@ export default function Hero({ scrollYProgress }: HeroProps) {
         <Image
           src="/bg.png"
           alt="Hero bg"
-          layout="fill"
-          objectFit="cover"
+          fill
           priority={true}
+          style={{ objectFit: "cover" }} // Use style prop for object-fit
         />
       </div>
 

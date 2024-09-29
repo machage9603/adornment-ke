@@ -24,13 +24,13 @@ const products: Product[] = [
     id: 2,
     name: "Wayfarer Classic",
     price: 155,
-    image: "/wayfarer-classic.jpg",
+    image: "/eye.jpg",
   },
   {
     id: 3,
     name: "Clubmaster Classic",
     price: 161,
-    image: "/clubmaster-classic.jpg",
+    image: "/eyewan.jpg",
   },
 ];
 
