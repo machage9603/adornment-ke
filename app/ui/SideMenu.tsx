@@ -14,6 +14,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
     { name: "Women", href: "/women" },
     { name: "Unisex", href: "/unisex" },
     { name: "Brands", href: "/brands" },
+    { name: "Caps", href: "/caps" },
   ];
 
   const menuVariants = {
