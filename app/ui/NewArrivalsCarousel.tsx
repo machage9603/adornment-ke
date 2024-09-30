@@ -4,7 +4,6 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
-// Define a type for the product
 interface Product {
   id: number;
   name: string;
@@ -12,26 +11,14 @@ interface Product {
   image: string;
 }
 
-// Define the props for the component, including the type for addToCart
 interface NewArrivalsCarouselProps {
   addToCart: (product: Product) => void;
 }
 
-// Example products
 const products: Product[] = [
   { id: 1, name: "Aviator Classic", price: 161, image: "/round.png" },
-  {
-    id: 2,
-    name: "Wayfarer Classic",
-    price: 155,
-    image: "/eye.jpg",
-  },
-  {
-    id: 3,
-    name: "Clubmaster Classic",
-    price: 161,
-    image: "/eyewan.jpg",
-  },
+  { id: 2, name: "Wayfarer Classic", price: 155, image: "/eye.jpg" },
+  { id: 3, name: "Clubmaster Classic", price: 161, image: "/eyewan.jpg" },
 ];
 
 export default function NewArrivalsCarousel({
@@ -40,16 +27,12 @@ export default function NewArrivalsCarousel({
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex + 1) % Math.ceil(products.length / 3)
-    ); // Adjust based on how many cards are displayed
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
   };
 
   const prevSlide = () => {
     setCurrentIndex(
-      (prevIndex) =>
-        (prevIndex - 1 + Math.ceil(products.length / 3)) %
-        Math.ceil(products.length / 3)
+      (prevIndex) => (prevIndex - 1 + products.length) % products.length
     );
   };
 
@@ -73,16 +56,19 @@ export default function NewArrivalsCarousel({
           <div className="overflow-hidden">
             <div
               className="flex transition-transform duration-300"
-              style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }} // Move according to 3 cards visible
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {products.map((product) => (
-                <div key={product.id} className="w-1/3 p-2">
+                <div
+                  key={product.id}
+                  className="w-full md:w-1/3 flex-shrink-0 p-2"
+                >
                   <div className="bg-white rounded-lg shadow-md overflow-hidden">
                     <Image
                       src={product.image}
                       alt={product.name}
-                      width={400} // Specify the width
-                      height={300} // Specify the height
+                      width={400}
+                      height={300}
                       className="w-full h-64 object-cover"
                     />
                     <div className="p-4">

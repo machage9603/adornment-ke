@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-black text-white py-6">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-4">About AdornmentKE</h3>
             <ul className="space-y-2">
@@ -84,7 +84,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 text-center">
-          <p>
+          <p className="text-sm">
             &copy; {new Date().getFullYear()} AdornmentKE. All rights reserved.
           </p>
         </div>

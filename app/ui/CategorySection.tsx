@@ -27,7 +27,7 @@ export default function CategorySection({ scrollYProgress }: CategoryProps) {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % categories.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
 
     return () => clearInterval(timer);
   }, []);
@@ -60,10 +60,10 @@ export default function CategorySection({ scrollYProgress }: CategoryProps) {
               alt={`${categories[currentIndex].name}'s Sunglasses`}
               fill
               priority
-              style={{ objectFit: "cover" }} // Use style prop for object-fit
+              style={{ objectFit: "cover" }}
             />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <h3 className="text-white text-5xl font-bold">
+              <h3 className="text-white text-3xl md:text-5xl font-bold">
                 {categories[currentIndex].name}
               </h3>
             </div>

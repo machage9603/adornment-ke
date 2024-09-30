@@ -39,14 +39,16 @@ export default function Cart({ items, removeFromCart, checkout }: CartProps) {
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="p-6 space-y-6">
+            <div className="p-4 md:p-6 space-y-4 md:space-y-6">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-800">Your Bag</h2>
+                <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+                  Your Bag
+                </h2>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="text-gray-500 hover:text-gray-700"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
               </div>
               <div className="space-y-4">
@@ -55,13 +57,14 @@ export default function Cart({ items, removeFromCart, checkout }: CartProps) {
                     key={item.id}
                     className="flex items-center space-x-4 bg-gray-50 p-3 rounded-lg"
                   >
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      width={60}
-                      height={60}
-                      className="rounded-md object-cover"
-                    />
+                    <div className="w-16 h-16 md:w-20 md:h-20 relative">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="rounded-md object-cover"
+                      />
+                    </div>
                     <div className="flex-grow">
                       <h3 className="font-medium text-gray-800">{item.name}</h3>
                       <p className="text-gray-600">${item.price.toFixed(2)}</p>
@@ -96,8 +99,8 @@ export default function Cart({ items, removeFromCart, checkout }: CartProps) {
                         }`}
                         onClick={() => setPaymentMethod("card")}
                       >
-                        <CreditCard className="w-5 h-5" />
-                        <span>Card</span>
+                        <CreditCard className="w-4 h-4 md:w-5 md:h-5" />
+                        <span className="text-sm md:text-base">Card</span>
                       </button>
                       <button
                         className={`flex-1 py-2 px-4 rounded-md flex items-center justify-center space-x-2 ${
@@ -107,8 +110,8 @@ export default function Cart({ items, removeFromCart, checkout }: CartProps) {
                         }`}
                         onClick={() => setPaymentMethod("mpesa")}
                       >
-                        <Smartphone className="w-5 h-5" />
-                        <span>M-Pesa</span>
+                        <Smartphone className="w-4 h-4 md:w-5 md:h-5" />
+                        <span className="text-sm md:text-base">M-Pesa</span>
                       </button>
                     </div>
                   </div>
@@ -117,18 +120,18 @@ export default function Cart({ items, removeFromCart, checkout }: CartProps) {
                       <input
                         type="text"
                         placeholder="Card Number"
-                        className="w-full p-2 border border-gray-300 rounded-md"
+                        className="w-full p-2 border border-gray-300 rounded-md text-sm md:text-base"
                       />
                       <div className="flex space-x-2">
                         <input
                           type="text"
                           placeholder="MM/YY"
-                          className="w-1/2 p-2 border border-gray-300 rounded-md"
+                          className="w-1/2 p-2 border border-gray-300 rounded-md text-sm md:text-base"
                         />
                         <input
                           type="text"
                           placeholder="CVV"
-                          className="w-1/2 p-2 border border-gray-300 rounded-md"
+                          className="w-1/2 p-2 border border-gray-300 rounded-md text-sm md:text-base"
                         />
                       </div>
                       <div className="flex space-x-2 justify-center">
@@ -157,11 +160,11 @@ export default function Cart({ items, removeFromCart, checkout }: CartProps) {
                     <input
                       type="text"
                       placeholder="M-Pesa Phone Number"
-                      className="w-full p-2 border border-gray-300 rounded-md"
+                      className="w-full p-2 border border-gray-300 rounded-md text-sm md:text-base"
                     />
                   )}
                   <button
-                    className="w-full bg-blue-600 text-white py-3 rounded-md font-medium hover:bg-blue-700 transition-colors"
+                    className="w-full bg-blue-600 text-white py-2 md:py-3 rounded-md font-medium hover:bg-blue-700 transition-colors text-sm md:text-base"
                     onClick={() => {
                       checkout(paymentMethod);
                       setIsOpen(false);

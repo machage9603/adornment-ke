@@ -9,7 +9,6 @@ import Footer from "./ui/Footer";
 import Cart from "./ui/Cart";
 import { useScroll } from "framer-motion";
 
-// Define a type for the product structure
 interface Product {
   id: number;
   name: string;
@@ -24,45 +23,47 @@ export default function Home() {
     offset: ["start start", "end end"],
   });
 
-  const [cartItems, setCartItems] = useState<Product[]>([]); // Specify the type for cartItems
+  const [cartItems, setCartItems] = useState<Product[]>([]);
 
   const addToCart = (product: Product) => {
-    setCartItems((prevItems) => [...prevItems, product]); // Use functional update for state
+    setCartItems((prevItems) => [...prevItems, product]);
   };
 
   const removeFromCart = (productId: number) => {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== productId)
-    ); // Use functional update
+    );
   };
 
   const checkout = (paymentMethod: string) => {
     console.log(`Checkout completed with ${paymentMethod} payment!`);
-    setCartItems([]); // Clear cart after checkout
+    setCartItems([]);
   };
 
   return (
     <div className="relative">
       <Header cartItemCount={cartItems.length} favoriteItemCount={0} />
 
-      <main ref={container} className="relative h-[300vh] pt-20 pb-16">
+      <main
+        ref={container}
+        className="relative min-h-screen pt-16 pb-16 md:pt-20 md:pb-16"
+      >
         {/* Hero Section */}
-        <div className="sticky top-0 mt-0">
+        <div className="sticky top-0">
           <Hero scrollYProgress={scrollYProgress} />
         </div>
 
         {/* Category Section */}
-        <div className="sticky top-0 mt-0">
+        <div className="sticky top-0">
           <CategorySection scrollYProgress={scrollYProgress} />
         </div>
 
         {/* New Arrivals Section */}
-        <div className="mt-0">
+        <div>
           <NewArrivalsCarousel addToCart={addToCart} />
         </div>
       </main>
 
-      {/* Footer */}
       <Footer />
 
       <Cart

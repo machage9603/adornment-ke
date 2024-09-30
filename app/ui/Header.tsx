@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, Search, ShoppingBag, Heart } from "lucide-react";
 import Link from "next/link";
 import SideMenu from "./SideMenu";
+import React from "react";
 
 interface HeaderProps {
   cartItemCount: number;
@@ -56,36 +57,40 @@ export default function Header({
             variants={headerVariants}
             transition={{ duration: 0.3 }}
           >
-            <div className="container mx-auto px-4 py-4 flex justify-between items-center padding-x">
-              {/* Menu Icon and Text */}
-              <motion.button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-white hover:text-gray-200 transition-colors flex items-center"
-                aria-label="Toggle menu"
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.1 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Menu className="w-6 h-6 mr-2" />
-                <span className="text-lg font-bold">Menu</span>
-              </motion.button>
+            <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+              <div className="flex items-center">
+                <motion.button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="text-white hover:text-gray-200 transition-colors flex items-center mr-4"
+                  aria-label="Toggle menu"
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ delay: 0.1 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Menu className="w-6 h-6" />
+                  <span className="text-lg font-bold hidden md:inline ml-2">
+                    Menu
+                  </span>
+                </motion.button>
 
-              {/* Logo */}
-              <motion.div
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.2 }}
-              >
-                <Link href="/" className="text-2xl font-bold text-white">
-                  AdornmentKE
-                </Link>
-              </motion.div>
+                <motion.div
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ delay: 0.2 }}
+                >
+                  <Link
+                    href="/"
+                    className="text-xl md:text-2xl font-bold text-white"
+                  >
+                    AdornmentKE
+                  </Link>
+                </motion.div>
+              </div>
 
-              {/* Icons (Search, Favorites, Cart) */}
               <div className="flex space-x-4">
                 <motion.button
                   aria-label="Search"
@@ -141,7 +146,6 @@ export default function Header({
         )}
       </AnimatePresence>
 
-      {/* Side Menu Component */}
       <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </>
   );

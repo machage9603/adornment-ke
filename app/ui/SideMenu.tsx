@@ -71,7 +71,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
                   >
                     <Link
                       href={item.href}
-                      className="text-4xl font-bold text-white hover:text-gray-300 transition-colors block"
+                      className="text-2xl md:text-4xl font-bold text-white hover:text-gray-300 transition-colors block"
                       onClick={onClose}
                     >
                       {item.name}
